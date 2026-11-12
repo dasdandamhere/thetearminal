@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tearminal — launch anything without the waterworks</title>
+  <title>Tearminal v2</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Baloo+2:wght@500;700;800&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
@@ -84,7 +84,7 @@
       height: 100%;
       border-radius: 50%;
       display: block;
-      box-shadow: 0 0 0 3px rgba(63,198,255,0.25), 0 18px 50px rgba(63,198,255,0.18);
+      box-shadow: 0 0 0 3px rgba(var(--acc-rgb),0.25), 0 18px 50px rgba(var(--acc-rgb),0.18);
     }
     @keyframes bob {
       0%, 100% { transform: translateY(0) rotate(-1deg); }
@@ -178,7 +178,7 @@
       position: absolute;
       inset: 0;
       border-radius: 20px;
-      background: linear-gradient(135deg, rgba(63,198,255,0.05) 0%, transparent 60%);
+      background: linear-gradient(135deg, rgba(var(--acc-rgb),0.05) 0%, transparent 60%);
       pointer-events: none;
     }
 
@@ -194,7 +194,7 @@
     #drop-zone:hover,
     #drop-zone.dragover {
       border-color: var(--accent);
-      background: rgba(63,198,255,0.05);
+      background: rgba(var(--acc-rgb),0.05);
     }
     #drop-zone.dragover {
       border-style: solid;
@@ -212,8 +212,8 @@
       width: 52px; height: 52px;
       margin: 0 auto 16px;
       border-radius: 12px;
-      background: rgba(63,198,255,0.09);
-      border: 1px solid rgba(63,198,255,0.2);
+      background: rgba(var(--acc-rgb),0.09);
+      border: 1px solid rgba(var(--acc-rgb),0.2);
       display: flex; align-items: center; justify-content: center;
       font-size: 22px;
       transition: transform 0.2s;
@@ -304,7 +304,7 @@
     }
     #launch-btn:not(:disabled):hover {
       transform: translateY(-2px);
-      box-shadow: 0 12px 40px rgba(63,198,255,0.35);
+      box-shadow: 0 12px 40px rgba(var(--acc-rgb),0.35);
     }
     #launch-btn:not(:disabled):active {
       transform: translateY(0);
@@ -441,6 +441,42 @@
       .card { padding: 36px 24px; }
       #drop-zone { padding: 40px 18px; }
     }
+
+    /* ── Tearminal+ ── */
+    :root{--acc-rgb:63,198,255}
+    [data-theme=ember]{--bg:#140c0a;--surface:#22140f;--border:#4a2a1c;--accent:#ff9a5c;--accent2:#ff5c8a;--muted:#b08a78;--acc-rgb:255,154,92}
+    [data-theme=mint]{--bg:#07130f;--surface:#0e2019;--border:#1d4636;--accent:#4be3a8;--accent2:#3fc6ff;--muted:#6fa593;--acc-rgb:75,227,168}
+    [data-theme=violet]{--bg:#0e0a1c;--surface:#181230;--border:#352a66;--accent:#b18cff;--accent2:#ff7ad9;--muted:#8a7cb5;--acc-rgb:177,140,255}
+    [data-theme=oled]{--bg:#000;--surface:#0a0a0a;--border:#1f1f1f;--muted:#777}
+    .themes{position:fixed;top:14px;right:14px;z-index:20;display:flex;gap:7px;background:rgba(var(--acc-rgb),.06);border:1px solid var(--border);border-radius:99px;padding:6px 9px;backdrop-filter:blur(8px)}
+    .themes button{width:18px;height:18px;border-radius:50%;border:2px solid transparent;cursor:pointer;background:linear-gradient(135deg,var(--c1),var(--c2));transition:transform .15s}
+    .themes button:hover{transform:scale(1.2)}
+    .themes button.on{border-color:var(--text)}
+    .opt{border:1px solid var(--border);border-radius:12px;padding:13px 16px;font-size:12px}
+    .opt summary{cursor:pointer;color:var(--text);font-family:var(--font-head);font-weight:700;font-size:13.5px}
+    .opt[open] summary{margin-bottom:12px}
+    .opt input[type=text],.lib input[type=text]{width:100%;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:8px;padding:9px 11px;color:var(--text);font:inherit;font-size:12px;margin-bottom:8px}
+    .opt input:focus,.lib input:focus{outline:none;border-color:var(--accent)}
+    .row{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+    .row input{margin:0!important}
+    .pill{font:inherit;font-size:10.5px;color:var(--muted);background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:99px;padding:5px 11px;cursor:pointer;white-space:nowrap;transition:.15s}
+    .pill:hover{color:var(--accent);border-color:var(--accent)}
+    .presets{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+    .chk{display:flex;gap:8px;align-items:center;font-size:11.5px;color:var(--muted);cursor:pointer}
+    .chk input{accent-color:var(--accent)}
+    .lib{width:100%;max-width:560px;animation:fadeUp .55s .15s ease both}
+    .lib-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+    .lib-head h2{font-family:var(--font-head);font-size:1.15rem;flex:1}
+    .lib-head input{width:140px;margin:0!important}
+    .lib-item{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:11px 14px;margin-bottom:8px;transition:border-color .2s,transform .15s}
+    .lib-item:hover{border-color:var(--accent);transform:translateY(-1px)}
+    .lib-item .meta{flex:1;min-width:0}
+    .lib-item .n{font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .lib-item .s{font-size:10.5px;color:var(--muted);margin-top:2px}
+    .ib{background:none;border:none;color:var(--muted);cursor:pointer;font-size:15px;padding:4px 7px;border-radius:6px;transition:.15s}
+    .ib:hover{color:var(--accent);background:rgba(var(--acc-rgb),.1)}
+    .ib.del:hover{color:var(--danger);background:rgba(255,107,122,.1)}
+    .empty{font-size:11.5px;color:var(--muted);text-align:center;padding:18px;border:1px dashed var(--border);border-radius:12px}
   </style>
 </head>
 <body>
@@ -495,6 +531,19 @@
         </div>
       </div>
 
+      <details class="opt" id="cloak">
+        <summary>🕶️ Tab cloak</summary>
+        <div class="presets" id="presets"></div>
+        <input type="text" id="cl-title" placeholder="Tab title (blank = keep the file's own)" />
+        <div class="row">
+          <input type="text" id="cl-emoji" maxlength="4" placeholder="Icon emoji" />
+          <label class="pill">Upload icon<input type="file" id="cl-img" accept="image/*" hidden></label>
+          <button class="pill" id="cl-reset" type="button">Reset</button>
+        </div>
+        <label class="chk"><input type="checkbox" id="cl-on"> Apply cloak when launching</label>
+      </details>
+      <label class="chk"><input type="checkbox" id="save-on" checked> Save to library (Enter launches, Ctrl+V pastes a file)</label>
+
       <button id="launch-btn" disabled>
         <span class="btn-inner">
           <span>🚀</span>
@@ -504,6 +553,15 @@
 
       <div id="status" class="inf">Pick a file and let's turn those tears into triumph</div>
     </div>
+
+    <section class="lib">
+      <div class="lib-head">
+        <h2>📚 Library</h2>
+        <input type="text" id="lib-q" placeholder="Search…" />
+        <button class="pill" id="lib-clear" type="button">Clear all</button>
+      </div>
+      <div id="lib-list"></div>
+    </section>
 
     <div class="how">
       <div class="how-step">
@@ -586,7 +644,7 @@
         setStatus('Only .html, .htm, or .zip files work here — anything else makes us cry (the bad kind).', 'err');
         return;
       }
-      selectedFile = f;
+      selectedFile = f; selectedId = null;
       fnameEl.textContent = f.name;
       fsizeEl.textContent = formatBytes(f.size);
       const isZip = /\.zip$/i.test(f.name);
@@ -598,7 +656,7 @@
     }
 
     function resetState() {
-      selectedFile = null;
+      selectedFile = null; selectedId = null;
       fileInput.value = '';
       fileInfo.classList.remove('visible');
       progressWrap.classList.remove('visible');
@@ -609,14 +667,7 @@
     }
 
     // ── launch ───────────────────────────────────────────
-    launchBtn.addEventListener('click', () => {
-      if (!selectedFile) return;
-      if (/\.zip$/i.test(selectedFile.name)) {
-        readAndLaunchZip(selectedFile);
-      } else {
-        readAndLaunch(selectedFile);
-      }
-    });
+    launchBtn.addEventListener('click', () => startLaunch());
 
     function readAndLaunch(file) {
       launchBtn.disabled = true;
@@ -951,6 +1002,7 @@
     }
 
     function openInBlank(html, filename) {
+      html = applyCloak(html);
       const win = window.open('about:blank', '_blank');
       if (!win) {
         setStatus('Pop-up blocked! Allow pop-ups for this page.', 'err');
@@ -987,6 +1039,147 @@
       if (bytes < 1024 ** 3)   return (bytes / 1024 ** 2).toFixed(2) + ' MB';
       return (bytes / 1024 ** 3).toFixed(2) + ' GB';
     }
+
+    // ══ Tearminal+ : themes · tab cloak · library ══════════
+    const $ = id => document.getElementById(id);
+    const LS = 'tearminal:v1';
+    let cfg = { theme: 'tear', cloak: { on: false, title: '', emoji: '', img: '' } };
+    try { Object.assign(cfg, JSON.parse(localStorage.getItem(LS) || '{}')); } catch {}
+    const saveCfg = () => { try { localStorage.setItem(LS, JSON.stringify(cfg)); } catch {} };
+    // Ask the browser not to evict our storage, so saves/library stay put between sessions.
+    if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {});
+
+    // themes
+    const THEMES = { tear: ['#3fc6ff', '#6b7dff'], ember: ['#ff9a5c', '#ff5c8a'], mint: ['#4be3a8', '#3fc6ff'], violet: ['#b18cff', '#ff7ad9'], oled: ['#3fc6ff', '#111'] };
+    const themeBar = document.createElement('div');
+    themeBar.className = 'themes';
+    Object.entries(THEMES).forEach(([k, [a, b]]) => {
+      const bt = document.createElement('button');
+      bt.title = k; bt.style.setProperty('--c1', a); bt.style.setProperty('--c2', b);
+      bt.onclick = () => setTheme(k);
+      themeBar.appendChild(bt);
+    });
+    document.body.appendChild(themeBar);
+    function setTheme(k) {
+      cfg.theme = k;
+      document.documentElement.dataset.theme = k === 'tear' ? '' : k;
+      [...themeBar.children].forEach(b => b.classList.toggle('on', b.title === k));
+      saveCfg();
+    }
+    setTheme(cfg.theme in THEMES ? cfg.theme : 'tear');
+
+    // tab cloak
+    const PRESETS = { 'Docs': ['📄', 'Untitled document - Google Docs'], 'Classroom': ['🎓', 'Classroom'], 'Drive': ['📁', 'My Drive - Google Drive'], 'Calculator': ['🧮', 'Calculator'], 'Notes': ['📝', 'Notes'] };
+    const clOn = $('cl-on'), clTitle = $('cl-title'), clEmoji = $('cl-emoji');
+    clOn.checked = !!cfg.cloak.on; clTitle.value = cfg.cloak.title || ''; clEmoji.value = cfg.cloak.emoji || '';
+    function syncCloak() {
+      if (clEmoji.value) cfg.cloak.img = '';
+      Object.assign(cfg.cloak, { on: clOn.checked, title: clTitle.value, emoji: clEmoji.value });
+      saveCfg();
+    }
+    [clOn, clTitle, clEmoji].forEach(e => e.addEventListener('input', syncCloak));
+    Object.entries(PRESETS).forEach(([n, [e, t]]) => {
+      const b = document.createElement('button');
+      b.className = 'pill'; b.type = 'button'; b.textContent = e + ' ' + n;
+      b.onclick = () => { clEmoji.value = e; clTitle.value = t; clOn.checked = true; syncCloak(); };
+      $('presets').appendChild(b);
+    });
+    $('cl-img').addEventListener('change', ev => {
+      const f = ev.target.files[0]; if (!f) return;
+      if (f.size > 300000) return setStatus('Icon too big — keep it under 300 KB.', 'err');
+      const r = new FileReader();
+      r.onload = () => { cfg.cloak.img = r.result; clEmoji.value = ''; clOn.checked = true; syncCloak(); setStatus('Custom icon set ✓', 'ok'); };
+      r.readAsDataURL(f);
+    });
+    $('cl-reset').onclick = () => { clTitle.value = ''; clEmoji.value = ''; clOn.checked = false; cfg.cloak.img = ''; syncCloak(); };
+
+    function applyCloak(html) {
+      const c = cfg.cloak;
+      if (!c.on) return html;
+      const icon = c.img || (c.emoji ? 'data:image/svg+xml,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">${c.emoji}</text></svg>`) : '');
+      let tags = '';
+      if (c.title) {
+        html = html.replace(/<title[^>]*>[\s\S]*?<\/title>/i, '');
+        tags += '<title>' + c.title.replace(/[&<>]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[m])) + '</title>';
+      }
+      if (icon) {
+        html = html.replace(/<link[^>]+rel=["']?(?:shortcut )?icon["']?[^>]*>/gi, '');
+        tags += `<link rel="icon" href="${icon}">`;
+      }
+      if (!tags) return html;
+      return /<head[^>]*>/i.test(html) ? html.replace(/<head[^>]*>/i, m => m + tags) : tags + html;
+    }
+
+    // library (IndexedDB — files persist between visits)
+    let selectedId = null;
+    const db = new Promise((res, rej) => {
+      const r = indexedDB.open('tearminal', 1);
+      r.onupgradeneeded = () => r.result.createObjectStore('files', { keyPath: 'id' });
+      r.onsuccess = () => res(r.result);
+      r.onerror = () => rej(r.error);
+    });
+    const tx = async (mode, fn) => {
+      const d = await db;
+      return new Promise((res, rej) => {
+        const t = d.transaction('files', mode);
+        const out = fn(t.objectStore('files'));
+        t.oncomplete = () => res(out && out.result);
+        t.onerror = () => rej(t.error);
+      });
+    };
+    const allFiles = () => tx('readonly', s => s.getAll());
+    const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
+    const ago = t => { const m = Math.round((Date.now() - t) / 6e4); return m < 1 ? 'just now' : m < 60 ? m + 'm ago' : m < 1440 ? Math.round(m / 60) + 'h ago' : Math.round(m / 1440) + 'd ago'; };
+
+    async function recordLaunch() {
+      if (!$('save-on').checked && !selectedId) return;
+      try {
+        const list = await allFiles();
+        let rec = list.find(r => r.id === selectedId) || list.find(r => r.name === selectedFile.name && r.size === selectedFile.size);
+        if (rec) { rec.last = Date.now(); rec.count = (rec.count || 0) + 1; }
+        else rec = { id: Date.now().toString(36) + Math.random().toString(36).slice(2), name: selectedFile.name, size: selectedFile.size, added: Date.now(), last: Date.now(), count: 1, pin: false, blob: selectedFile };
+        selectedId = rec.id;
+        await tx('readwrite', s => s.put(rec));
+        renderLib();
+      } catch (e) { console.warn('Library unavailable', e); }
+    }
+
+    async function renderLib() {
+      const box = $('lib-list');
+      let list;
+      try { list = await allFiles(); } catch { box.replaceChildren(el('div', 'empty', 'Library isn’t available in this browser context.')); return; }
+      const q = $('lib-q').value.trim().toLowerCase();
+      list = list.filter(r => r.name.toLowerCase().includes(q)).sort((a, b) => (b.pin - a.pin) || (b.last - a.last));
+      box.replaceChildren();
+      if (!list.length) box.appendChild(el('div', 'empty', q ? 'No matches.' : 'Nothing here yet — launched files get saved automatically.'));
+      list.forEach(r => {
+        const it = el('div', 'lib-item'), meta = el('div', 'meta');
+        meta.append(el('div', 'n', r.name), el('div', 's', `${formatBytes(r.size)} · ${r.count || 1} launch${r.count > 1 ? 'es' : ''} · ${ago(r.last)}`));
+        const btn = (t, title) => { const b = el('button', 'ib', t); b.title = title; return b; };
+        const go = btn('▶', 'Launch'), pin = btn(r.pin ? '★' : '☆', 'Pin'), del = btn('✕', 'Delete');
+        del.classList.add('del');
+        go.onclick = () => { handleFile(new File([r.blob], r.name)); selectedId = r.id; startLaunch(); };
+        pin.onclick = async () => { r.pin = !r.pin; await tx('readwrite', s => s.put(r)); renderLib(); };
+        del.onclick = async () => { await tx('readwrite', s => s.delete(r.id)); if (selectedId === r.id) selectedId = null; renderLib(); };
+        it.append(el('span', 'file-icon', /\.zip$/i.test(r.name) ? '🗂️' : '📄'), meta, go, pin, del);
+        box.appendChild(it);
+      });
+    }
+    $('lib-q').addEventListener('input', renderLib);
+    $('lib-clear').onclick = async () => { if (confirm('Remove every saved file (pinned too)?')) { await tx('readwrite', s => s.clear()); renderLib(); } };
+
+    function startLaunch() {
+      if (!selectedFile) return;
+      recordLaunch();
+      if (/\.zip$/i.test(selectedFile.name)) readAndLaunchZip(selectedFile); else readAndLaunch(selectedFile);
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && !launchBtn.disabled && !/INPUT|BUTTON|SUMMARY/.test(document.activeElement.tagName)) startLaunch();
+    });
+    document.addEventListener('paste', e => { const f = e.clipboardData && e.clipboardData.files[0]; if (f) handleFile(f); });
+
+    renderLib();
   </script>
 </body>
 </html>
